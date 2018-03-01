@@ -1,52 +1,65 @@
 // http://eslint.org/docs/user-guide/configuring
 
 module.exports = {
-    root: true,
-    parser: 'babel-eslint',
+    root         : true,
+    parser       : 'babel-eslint',
     parserOptions: {
         sourceType: 'module',
     },
-    env: {
+    env          : {
         browser: true,
-        // mocha: true,
+        mocha  : true,
     },
-    extends: 'airbnb-base',
+    // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
+    extends      : [
+        'eslint:recommended',
+        'airbnb-base',
+    ],
     // required to lint *.vue files
-    plugins: [
+    plugins      : [
         'html',
+        'vue',
+        // 'flowtype-errors',
     ],
     // check if imports actually resolve
-    settings: {
+    settings     : {
         'import/resolver': {
             'webpack': {
-                'config': './node_modules/laravel-mix/setup/webpack.config.js',
+                config: './node_modules/laravel-mix/setup/webpack.config.js',
             },
         },
     },
-    globals: {
+    globals      : {
         expect: true,
-        sinon: true,
+        sinon : true,
     },
     // add your custom rules here
-    rules: {
+    rules        : {
         // don't require .vue extension when importing
-        'import/extensions': ['error', 'always', {
-            js: 'never',
-            vue: 'never',
-        }],
+        // 'import/extensions': ['off', 'never', {
+        //     js: 'never',
+        //     vue: 'never'
+        // }],
         // allow optionalDependencies
         'import/no-extraneous-dependencies': ['error', {
-            'optionalDependencies': ['test/unit/index.js']
+            optionalDependencies: ['test/unit/index.js']
         }],
-        'semi': ['error', 'always'],
-        'key-spacing': ["error", { "align": "colon" }],
-        'comma-dangle': ['error', 'always-multiline'],
-        'space-before-function-paren': ['error', 'never'],
-        'object-curly-spacing': ['error', 'always'],
-        'function-paren-newline': ['error', 'consistent'],
-        'object-shorthand': ['error': 'always'],
+        'semi'                             : ['error', 'always'],
+        'comma-dangle'                     : ['error', 'always-multiline'],
+        'space-before-function-paren'      : ['error', 'never'],
+        'object-curly-spacing'             : ['error', 'always'],
+        'no-multi-spaces'                  : ['error', {
+            exceptions: {
+                VariableDeclarator: true,
+                ImportDeclaration : true,
+            },
+        }],
+        // 'import/no-unresolved': [0, { commonjs: true, amd: true }],
+        // 'flowtype-errors/show-errors': 2,
         // allow debugger during development
-        'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
-        'indent': ['error', 4],
+        'no-debugger'                      : process.env.NODE_ENV === 'production' ? 2 : 0,
+        'indent'                           : ['error', 4, {
+            SwitchCase: 1,
+        }],
     },
 };
