@@ -1,59 +1,88 @@
-// http://eslint.org/docs/user-guide/configuring
-
 module.exports = {
-    root         : true,
-    parser       : 'babel-eslint',
-    parserOptions: {
-        sourceType: 'module',
+  root: true,
+  parserOptions: {
+    sourceType: 'module',
+    parser: 'babel-eslint',
+    ecmaVersion: 2017,
+    ecmaFeatures: {
+      jsx: true,
+      vue: true,
     },
-    env          : {
-        browser: true,
-        mocha  : true,
-    },
-    // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
-    extends      : [
-        'eslint:recommended',
-        'airbnb-base',
+  },
+  env: {
+    node: true,
+  },
+  plugins: [
+    'vue',
+    'graphql',
+  ],
+  extends: [
+    'plugin:vue/recommended',
+    '@vue/airbnb',
+  ],
+  rules: {
+    'no-console': 'off',
+    'no-debugger': 'off',
+    'import/no-unresolved': [
+      0,
+      {
+        commonjs: true,
+        amd: true,
+      },
     ],
-    // required to lint *.vue files
-    plugins      : [
-        'html',
-        'vue',
-        // 'flowtype-errors',
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        mjs: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
+        vue: 'never',
+        json: 'never',
+      },
     ],
-    // check if imports actually resolve
-    settings     : {
-        'import/resolver': {
-            'webpack': {
-                'config': './node_modules/laravel-mix/setup/webpack.config.js',
-            },
-        },
-    },
-    globals      : {
-        expect: true,
-        sinon : true,
-    },
-    // add your custom rules here
-    rules        : {
-        // don't require .vue extension when importing
-        // 'import/extensions': ['off', 'never', {
-        //     'js': 'never',
-        //     'vue': 'never'
-        // }],
-        // allow optionalDependencies
-        'import/no-extraneous-dependencies': ['error', {
-            'optionalDependencies': ['test/unit/index.js']
-        }],
-        'semi'                             : ['error', 'always'],
-        'key-spacing'                      : ["error", { "align": "colon" }],
-        'comma-dangle'                     : ['error', 'always-multiline'],
-        'space-before-function-paren'      : ['error', 'never'],
-        'object-curly-spacing'             : ['error', 'always'],
-        // 'import/no-unresolved': [0, { commonjs: true, amd: true }],
-        // 'flowtype-errors/show-errors': 2,
-        // allow debugger during development
-        'no-debugger'                      : process.env.NODE_ENV === 'production' ? 2 : 0,
-        'indent'                           : ['error', 4],
-    },
+    'function-paren-newline': [
+      'error',
+      'consistent',
+    ],
+    'no-underscore-dangle': [
+      'error',
+      {
+        allow:
+          [
+            '_id',
+            '_key',
+            '_isVue',
+            '__get',
+            '__typename',
+          ],
+      },
+    ],
+    'vue/attribute-hyphenation': [
+      'error',
+      'always',
+    ],
+    'vue/html-end-tags': 'error',
+    'vue/html-indent': [
+      'error',
+      2,
+    ],
+    'vue/html-self-closing': 'error',
+    'vue/require-default-prop': 'error',
+    'vue/require-prop-types': 'error',
+    'vue/attributes-order': 'error',
+    'vue/html-quotes': [
+      'error',
+      'double',
+    ],
+    'vue/order-in-components': 'error',
+    'graphql/template-strings': [
+      'error',
+      {
+        env: 'literal',
+      },
+    ],
+  },
 };
-
