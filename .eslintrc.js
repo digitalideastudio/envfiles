@@ -21,6 +21,7 @@ module.exports = {
     '@vue/airbnb',
   ],
   rules: {
+    'class-methods-use-this': 'off',
     'no-console': 'off',
     'no-debugger': 'off',
     'import/no-unresolved': [
